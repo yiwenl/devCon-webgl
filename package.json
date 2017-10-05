@@ -1,0 +1,26 @@
+{
+  "name": "dev-con-webgl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pixi": "node ./tasks/serve.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://yiwenl@github.com/yiwenl/devCon-webgl.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yiwenl/devCon-webgl/issues"
+  },
+  "homepage": "https://github.com/yiwenl/devCon-webgl#readme",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^7.3.0",
+    "pixi.js": "5.0.0-alpha",
+    "budo": "^10.0.4"
+  }
+}
