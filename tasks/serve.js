@@ -1,10 +1,20 @@
 // serve.js
 
-const budo = require('budo')
-const babelify = require('babelify')
+const budo = require('budo');
+const babelify = require('babelify');
 
-budo('./pixi/index.js', {
+let args = process.argv.slice(2)[0];
+
+if (args === undefined || args === '') {
+	args = 'dev';
+}
+
+console.log('Args : ', args);
+
+
+budo(`./${args}/index.js`, {
   live: true,             // setup live reload
+  open:true,
   browserify: {
     transform: [["babelify", { "presets": ["es2015"] }]]
   }
@@ -14,3 +24,4 @@ budo('./pixi/index.js', {
 }).on('update', function (buffer) {
   console.log('bundle - %d bytes', buffer.length)
 })
+

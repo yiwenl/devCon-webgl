@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "pixi": "node ./tasks/serve.js"
+    "pixi": "node ./tasks/serve.js pixi",
+    "stackgl": "node ./tasks/serve.js stackgl",
+    "start": "node ./tasks/serve.js"
   },
   "repository": {
     "type": "git",
