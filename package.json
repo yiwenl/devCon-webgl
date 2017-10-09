@@ -26,5 +26,8 @@
     "budo": "^10.0.4",
     "pixi.js": "5.0.0-alpha",
     "regl": "^1.3.0"
+  },
+  "dependencies": {
+    "alfrid": "^0.1.30"
   }
 }
