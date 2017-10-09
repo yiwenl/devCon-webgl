@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "pixi": "node ./tasks/serve.js pixi",
+    "regl": "node ./tasks/serve.js regl",
     "stackgl": "node ./tasks/serve.js stackgl",
     "start": "node ./tasks/serve.js"
   },
@@ -22,7 +23,8 @@
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
     "babelify": "^7.3.0",
+    "budo": "^10.0.4",
     "pixi.js": "5.0.0-alpha",
-    "budo": "^10.0.4"
+    "regl": "^1.3.0"
   }
 }

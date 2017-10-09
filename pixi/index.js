@@ -2,17 +2,17 @@
 
 import * as PIXI from 'pixi.js';
 
-const renderer = PIXI.autoDetectRenderer(500, 500);
+const size = Math.min(window.innerHeight, 500);
+const renderer = PIXI.autoDetectRenderer(size, size);
 document.body.appendChild(renderer.view);
 
 const stage = new PIXI.Stage();
 
 const d = .5;
 const positions = [
-
-	-d, 0, 0,
-	 d, 0, 0,
-	 d, d, 0
+	-d, -d, 0,
+	 d, -d, 0,
+	 0, d, 0
 ];
 
 const indices = [0, 1, 2];
