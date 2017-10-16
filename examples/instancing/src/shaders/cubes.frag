@@ -4,6 +4,7 @@
 
 precision highp float;
 varying vec3 vNormal;
+varying vec4 vColor;
 
 float diffuse(vec3 N, vec3 L) {
 	return max(dot(N, normalize(L)), 0.0);
@@ -20,5 +21,5 @@ const vec3 LIGHT = vec3(1.0, .8, .6);
 void main(void) {
 	float _diffuse = diffuse(vNormal, LIGHT);
 	_diffuse = mix(_diffuse, 1.0, .5);
-    gl_FragColor = vec4(vec3(_diffuse), 1.0);
+    gl_FragColor = vec4(vec3(_diffuse), 1.0) * vColor;
 }

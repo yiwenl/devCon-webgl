@@ -11,7 +11,7 @@ class SceneApp extends Scene {
 		super();
 		GL.enableAlphaBlending();
 		this.orbitalControl.rx.value = this.orbitalControl.ry.value = 0.3;
-		this.orbitalControl.radius.value = 15;
+		this.orbitalControl.radius.value = 25;
 	}
 
 	_initTextures() {
