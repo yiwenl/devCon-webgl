@@ -9,45 +9,52 @@ document.body.appendChild(canvas);
 const regl = _regl(canvas);
 
 
-const vert = `
+
+
+const d = .9;
+const positions = [
+	-d, -d, 0,
+	 d, -d, 0,
+	 0,  d, 0
+];
+
+
+//	shader
+const vs = `
 	precision highp float;
 	attribute vec3 aVertexPosition;
 
 	void main() {
 		gl_Position = vec4(aVertexPosition, 1.0);
 	}
-`;		
+`;
 
-const frag = `
+const fs = `
+	precision highp float;
+
 	void main() {
 		gl_FragColor = vec4(1.0);
 	}
 `;
 
-const d = .5;
-const positions = [
-	-d, -d, 0,
-	 d, -d, 0,
-	 0, d, 0
-];
 
 const attributes = {
 	aVertexPosition:positions
 }
 
-const drawTriangle = regl({
-	vert,
-	frag,
+const drawCall = regl({
 	attributes,
+	vert:vs,
+	frag:fs,
 	count:3
 });
 
 
-regl.frame(() => {
+regl.frame(()=> {
 	regl.clear({
-		color: [0, 0, 0, 1],
-		depth: 1
+		color:[0, 0, 0, 1],
+		depth:1
 	});
 
-	drawTriangle();
-});
+	drawCall();
+})

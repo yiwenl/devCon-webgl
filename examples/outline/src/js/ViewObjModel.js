@@ -8,13 +8,13 @@ import fs from '../shaders/pbr.frag';
 
 import fsColor from 'shaders/color.frag';
 
+
 class ViewObjModel extends alfrid.View {
 	
 	constructor() {
 		super(vs, fs);
 
-		this.time = Math.random() * 0xFF;
-		this.shaderOutline = new alfrid.GLShader(vs, fsColor); 
+		this.shaderOutline = new alfrid.GLShader(vs, fsColor);
 	}
 
 
@@ -29,28 +29,21 @@ class ViewObjModel extends alfrid.View {
 		gui.add(this, 'roughness', 0, 1);
 		gui.add(this, 'specular', 0, 1);
 		gui.add(this, 'metallic', 0, 1);
-
-		this.lineWidth = 0.01;
-		gui.add(this, 'lineWidth', 0, .1);
 	}
 
 
 	render(textureRad, textureIrr, textureAO) {
-		this.time += 0.05;
 
 		GL.gl.cullFace(GL.gl.FRONT);
+
 		this.shaderOutline.bind();
+		this.shaderOutline.uniform('uColor', 'vec3', [0, 0, 0]);
+		this.shaderOutline.uniform('uLineWidth', 'float', .015);
 		GL.draw(this.mesh);
-		this.shaderOutline.uniform("uTime", "float", this.time);
-		this.shaderOutline.uniform('uOutlineSize', 'float', this.lineWidth);
 
 
 		GL.gl.cullFace(GL.gl.BACK);
 		this.shader.bind();
-
-		this.shader.uniform("uTime", "float", this.time);
-		this.shader.uniform('uOutlineSize', 'float', 0);
-
 
 		this.shader.uniform('uAoMap', 'uniform1i', 0);
 		this.shader.uniform('uRadianceMap', 'uniform1i', 1);
@@ -59,6 +52,7 @@ class ViewObjModel extends alfrid.View {
 		textureRad.bind(1);
 		textureIrr.bind(2);
 
+		this.shader.uniform('uLineWidth', 'float', 0);
 		this.shader.uniform('uBaseColor', 'uniform3fv', this.baseColor);
 		this.shader.uniform('uRoughness', 'uniform1f', this.roughness);
 		this.shader.uniform('uMetallic', 'uniform1f', this.metallic);
