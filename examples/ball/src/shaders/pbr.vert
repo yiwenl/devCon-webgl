@@ -92,10 +92,10 @@ float snoise(float x, float y, float z){
 void main(void) {
 
 	vec3 relativePos 		= aVertexPosition - aCenter;
-	float noise = snoise(aCenter * 0.2 + uTime) * .5 + .5;
+	float noise = snoise(aCenter * 0.5 + uTime) * .5 + .5;
 	noise = smoothstep(0.0, .75, noise);
 
-	vec3 position 			= relativePos * noise + aCenter;
+	vec3 position 			= relativePos * noise + aCenter + aNormal * .1 * (1.0 - noise);
 	vec4 worldSpacePosition	= uModelMatrix * vec4(position, 1.0);
     vec4 viewSpacePosition	= uViewMatrix * worldSpacePosition;
 	

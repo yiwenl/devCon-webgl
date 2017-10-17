@@ -35,7 +35,7 @@ class SceneApp extends Scene {
 	render() {
 		GL.clear(0, 0, 0, 0);
 
-		this._bSky.draw(Assets.get('irr'));
+		// this._bSky.draw(Assets.get('irr'));
 
 		this._bAxis.draw();
 		this._bDots.draw();
