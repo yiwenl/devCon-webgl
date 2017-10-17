@@ -7,7 +7,6 @@ import Assets from './Assets';
 class SceneApp extends Scene {
 	constructor() {
 		super();
-		this.resize();
 		GL.enableAlphaBlending();
 		this.orbitalControl.rx.value = this.orbitalControl.ry.value = 0.3;
 		this.orbitalControl.radius.value = 5;
@@ -45,9 +44,7 @@ class SceneApp extends Scene {
 
 
 	resize() {
-		let { innerWidth, innerHeight, devicePixelRatio } = window;
-		if(!GL.isMobile) devicePixelRatio = 1;
-		GL.setSize(innerWidth * devicePixelRatio, innerHeight * devicePixelRatio);
+		GL.setSize(window.innerWidth, window.innerHeight);
 		this.camera.setAspectRatio(GL.aspectRatio);
 	}
 }
