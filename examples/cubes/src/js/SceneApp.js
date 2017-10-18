@@ -1,16 +1,25 @@
 // SceneApp.js
 
 import alfrid, { Scene, GL } from 'alfrid';
-// import ViewObjModel from './ViewObjModel';
 import ViewCube from './ViewCube';
 import Assets from './Assets';
+
+var random = function(min, max) { return min + Math.random() * (max - min);	}
 
 class SceneApp extends Scene {
 	constructor() {
 		super();
 		GL.enableAlphaBlending();
 		this.orbitalControl.rx.value = this.orbitalControl.ry.value = 0.3;
-		this.orbitalControl.radius.value = 10;
+		this.orbitalControl.radius.value = 20;
+
+
+		this.cameraOrtho = new alfrid.CameraOrtho();
+
+		const s = 10;
+		this.cameraOrtho.ortho(-s, s, -s, s, .1, 100);
+
+		new alfrid.OrbitalControl(this.cameraOrtho, window, 20);
 	}
 
 	_initTextures() {
@@ -24,34 +33,22 @@ class SceneApp extends Scene {
 		this._bCopy = new alfrid.BatchCopy();
 		this._bAxis = new alfrid.BatchAxis();
 		this._bDots = new alfrid.BatchDotsPlane();
-		this._bSky = new alfrid.BatchSkybox();
 
-		// this._vModel = new ViewObjModel();
 
 		this._vCube = new ViewCube();
-
 		
 	}
 
 
 	render() {
-		// this.orbitalControl.ry.value += 0.01;
 		GL.clear(0, 0, 0, 0);
 
-		// this._bSky.draw(Assets.get('studio_radiance'));
-		// this._bSky.draw(Assets.get('irr'));
+		// GL.setMatrices(this.cameraOrtho);
 
-		this._bAxis.draw();
+		// this._bAxis.draw();
 		this._bDots.draw();
 
-
-
-		// this._positions.forEach( pos => {
-			// cube.render();
 		this._vCube.render();
-		// });
-
-		// this._vModel.render(Assets.get('studio_radiance'), Assets.get('irr'), Assets.get('aomap'));
 	}
 
 

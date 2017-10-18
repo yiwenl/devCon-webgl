@@ -8,12 +8,13 @@ import fs from '../shaders/pbr.frag';
 
 import fsColor from 'shaders/color.frag';
 
+
 class ViewObjModel extends alfrid.View {
 	
 	constructor() {
 		super(vs, fs);
 
-		this.shaderColor = new alfrid.GLShader(vs, fsColor);
+		this.shaderOutline = new alfrid.GLShader(vs, fsColor);
 	}
 
 
@@ -34,9 +35,11 @@ class ViewObjModel extends alfrid.View {
 	render(textureRad, textureIrr, textureAO) {
 
 		GL.gl.cullFace(GL.gl.FRONT);
-		this.shaderColor.bind();
+
+		this.shaderOutline.bind();
+		this.shaderOutline.uniform('uColor', 'vec3', [0, 0, 0]);
+		this.shaderOutline.uniform('uLineWidth', 'float', .015);
 		GL.draw(this.mesh);
-		this.shaderColor.uniform('lineWidth', 'float', 0.01);
 
 
 		GL.gl.cullFace(GL.gl.BACK);
@@ -45,11 +48,11 @@ class ViewObjModel extends alfrid.View {
 		this.shader.uniform('uAoMap', 'uniform1i', 0);
 		this.shader.uniform('uRadianceMap', 'uniform1i', 1);
 		this.shader.uniform('uIrradianceMap', 'uniform1i', 2);
-		this.shader.uniform('lineWidth', 'float', 0.0);
 		textureAO.bind(0);
 		textureRad.bind(1);
 		textureIrr.bind(2);
 
+		this.shader.uniform('uLineWidth', 'float', 0);
 		this.shader.uniform('uBaseColor', 'uniform3fv', this.baseColor);
 		this.shader.uniform('uRoughness', 'uniform1f', this.roughness);
 		this.shader.uniform('uMetallic', 'uniform1f', this.metallic);
