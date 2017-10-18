@@ -8,3 +8,4 @@ document.body.appendChild(canvas);
 
 GL.init(canvas);
 GL.setSize(size, size);
+
